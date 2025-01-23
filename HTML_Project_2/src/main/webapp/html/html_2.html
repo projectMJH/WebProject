@@ -1,0 +1,83 @@
+<!-- 
+	table 태그
+	--------- 제목 / 데이터 출력
+	
+		<table>
+		  |
+		 <tr>
+		  |
+	-------------	  
+	|	   		|
+  <th>		  <td>
+  ----		  ----
+  제목		  데이터 줄력
+  
+  		----------------------------
+  		<tr>					</tr>
+  			<th>번호</th>	
+  			<th>제목</th>	
+  			<th>이름</th>	
+  		----------------------------
+  		<tr>					</tr>
+  			<td>1</td>	
+  			<td>게시판</td>	
+  			<td>홍길동</td>	
+  		----------------------------
+  		<tr>					</tr>
+  			<td>1</td>	
+  			<td>게시판</td>	
+  			<td>홍길동</td>	
+  		----------------------------
+  		
+  		=> colspan / rowspan
+  		   -------	 -------
+  		   가로병합	  세로병합
+  		=> <thead>
+  		   <tbody>
+  		   <tfoot>   
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>Table 태그 연습</h3>
+	<table border=1 width=500 bordercolor=black cellspacing=1 cellpadding=4>
+	  <thead><!-- 한번만 수행 HTML은 상관없다 / Vue, React -->
+		<tr height="10">
+			<th>학번</th><!-- th : bold / 가운데 정렬  -->
+			<th>이름</th>
+			<th>국어</th>
+			<th>영어</th>
+			<th>수학</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr>
+			<!-- left / center / right -->
+			<td align="center">1</td><!-- td : 일반 문자 / 왼쪽 정렬 -->
+			<td align=center>홍길동</td><!-- td : 일반 문자 / 왼쪽 정렬 -->
+			<td align=right>85</td><!-- td : 일반 문자 / 왼쪽 정렬 -->
+			<td align=right>89</td><!-- td : 일반 문자 / 왼쪽 정렬 -->
+			<td align=right>70</td><!-- td : 일반 문자 / 왼쪽 정렬 -->
+		</tr>
+		<tr>
+			<td align="center">2</td>
+			<td>심청이</td>
+			<td>100</td>
+			<td>90</td>
+			<td>45</td>
+		</tr>
+		<tr>
+			<td align="center">3</td>
+			<td>박문수</td>
+			<td>70</td>
+			<td>90</td>
+			<td>100</td>
+		</tr>
+	  </tbody>
+	</table>
+</body>
+</html>
