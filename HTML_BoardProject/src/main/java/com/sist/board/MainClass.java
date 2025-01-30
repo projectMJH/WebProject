@@ -1,7 +1,7 @@
 package com.sist.board;
 
 public class MainClass {
-
+ 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
         String name="홍길동";
