@@ -1,4 +1,4 @@
-package com.sist.board;
+package com.sist.board; 
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
