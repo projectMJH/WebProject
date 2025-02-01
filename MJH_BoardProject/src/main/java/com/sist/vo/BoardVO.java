@@ -1,4 +1,4 @@
-package com.sist.vo;
+package com.sist.vo; 
 
 import java.util.Date;
 //import lombok.Data; 
