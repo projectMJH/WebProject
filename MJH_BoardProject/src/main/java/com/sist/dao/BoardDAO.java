@@ -75,13 +75,11 @@ public class BoardDAO {
 				vo.setNo(rs.getInt(1));
 				vo.setName(rs.getString(2));
 				vo.setSubject(rs.getString(3));
-				
-//				vo.setEng(rs.getInt(4));
-//				vo.setMath(rs.getInt(5));
+				vo.setDbday(rs.getString(4));
+				vo.setHit(rs.getInt(5));
+				list.add(vo);
 			}
-			
 			rs.close();
-			
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -97,6 +95,20 @@ public class BoardDAO {
 	public int boardTotalPage()
 	{
 		int total=0;
+		try
+		{
+			getConnection();
+			String sql="SELECT "
+					+"FROM "
+					+"WHERE ";
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
 		
 		return total;
 		
@@ -105,6 +117,30 @@ public class BoardDAO {
 	public BoardVO boardDetailData(int no)
 	{
 		BoardVO vo=new BoardVO();
+		try
+		{
+			getConnection();
+			String sql="SELECT no,name,subject,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS')as dbday,content,hit "
+					+"FROM htmlBoard "
+					+"WHERE no="+no;
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			vo.setNo(rs.getInt(1));
+			vo.setName(rs.getString(2));
+			vo.setSubject(rs.getString(3));
+			vo.setDbday(rs.getString(4));
+			vo.setContent(rs.getString(5));
+			vo.setHit(rs.getInt(6));
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
 		return vo;
 	}
 	//3. 글쓰기
