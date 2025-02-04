@@ -85,7 +85,7 @@ public class GinieMusicDAO {
 		{
 			getConnection();
 			String sql="SELECT CEIL(count(*)/12.0) "
-					+"FROM ginie_music";
+					+"FROM genie_music";
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
 			rs.next();
@@ -101,4 +101,67 @@ public class GinieMusicDAO {
 		}
 		return total;
 	}
+	
+	public GinieMusicVO musicDetailData(int mno)
+	{
+		GinieMusicVO vo=new GinieMusicVO();
+		try
+		{
+			getConnection();
+			String sql="UPDATE genie_music SET "
+					+"hit=hit+1 "
+					+"WHERE mno="+mno;
+			ps=conn.prepareStatement(sql);
+			ps.executeUpdate();
+			
+			sql="SELECT title,singer,album,poster,hit "
+				+"FROM genie_music "
+				+"WHERE mno="+mno;
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			vo.setAlbum(rs.getString("album"));
+			vo.setTitle(rs.getString("title"));
+			vo.setSinger(rs.getString("singer"));
+			vo.setPoster(rs.getString("poster"));
+			vo.setHit(rs.getInt("hit"));
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+		return vo;
+	}
+	
+	public GinieMusicVO musicCookieData(int mno)
+	{
+		GinieMusicVO vo=new GinieMusicVO();
+		try
+		{
+			getConnection();
+			String sql="SELECT mno,title,poster "
+					+"FROM genie_music "
+					+"WHERE mno="+mno;
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			vo.setMno(rs.getInt("mno"));
+			vo.setTitle(rs.getString("title"));
+			vo.setPoster(rs.getString("poster"));
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+		return vo;
+	}
+
 }

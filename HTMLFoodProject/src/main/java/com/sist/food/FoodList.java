@@ -83,7 +83,6 @@ public class FoodList extends HttpServlet {
 		{
 			out.println("<li><a href=\"FoodList?page="+(startPage-1)+"\">&lt;</a></li>");
 		}
-
 		for(int i=startPage;i<=endPage;i++)
 		{
 			if(i==curpage)
@@ -101,6 +100,34 @@ public class FoodList extends HttpServlet {
 		}
 		out.println("</ul>");
 		out.println("</div>");
+
+		out.println("<div class=row>");
+		out.println("<h3>최신 방문 맛집</h3>");
+		out.println("<hr>");
+		List<FoodVO> cList=new ArrayList<FoodVO>();
+		Cookie[] cookies=request.getCookies();
+		if(cookies!=null)
+		{
+			// 최신순으로 
+			for (int i=cookies.length-1;i>=0;i--)
+			{
+				if(cookies[i].getName().startsWith("food_"))
+				{
+					String fno=cookies[i].getValue();
+					FoodVO vo=dao.foodCookieData(Integer.parseInt(fno));
+					cList.add(vo);
+				}
+			}
+		}
+		for(int i=0;i<cList.size();i++)
+		{
+			FoodVO cvo=cList.get(i);
+			if(i>8) break;
+			out.println("<a href=FoodDetail?fno="+cvo.getFno()+">");
+			out.println("<img src="+cvo.getPoster()+" style=\"width:100px;height:100px\" class=img-rounded title="+cvo.getName()+">");
+		}
+		out.println("</div>");
+
 		out.println("</div>");
 		out.println("</body>");
 		out.println("</html>");

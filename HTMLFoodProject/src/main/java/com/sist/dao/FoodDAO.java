@@ -123,10 +123,11 @@ public class FoodDAO {
 			sql="SELECT fno,name,type,phone,address,score,theme,"
 					+ "poster,images,time,parking,content,hit,price "
 					+"FROM food_menupan "
-					+"WHERE fon="+fno;
+					+"WHERE fno="+fno;
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
 			rs.next();
+			/*
 			vo.setFno(rs.getInt(1));
 			vo.setName(rs.getString(2));
 			vo.setType(rs.getString(3));
@@ -141,6 +142,20 @@ public class FoodDAO {
 			vo.setContent(rs.getString(12));
 			vo.setHit(rs.getInt(13));
 			vo.setPrice(rs.getString(14));
+			*/
+			vo.setName(rs.getString("name"));
+			vo.setType(rs.getString("type"));
+			vo.setPhone(rs.getString("phone"));
+			vo.setAddress(rs.getString("address"));
+			vo.setTheme(rs.getString("theme"));
+			vo.setPoster("https://www.menupan.com"+rs.getString("poster"));
+			vo.setImages(rs.getString("images"));
+			vo.setTime(rs.getString("time"));
+			vo.setParking(rs.getString("parking"));
+			vo.setContent(rs.getString("content"));
+			vo.setPrice(rs.getString("price"));
+			vo.setScore(rs.getDouble("score"));
+			vo.setHit(rs.getInt("hit"));
 			rs.close();
 		}catch(Exception ex)
 		{
@@ -150,6 +165,34 @@ public class FoodDAO {
 		{
 			disConnection();
 		}
+		return vo;
+	}
+	public FoodVO foodCookieData(int fno)
+	{
+		FoodVO vo= new FoodVO();
+		try
+		{
+			getConnection();
+			String sql="SELECT fno,name,poster "
+					+"FROM food_menupan "
+					+"WHERE fno="+fno;
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			vo.setFno(rs.getInt("fno"));
+			vo.setName(rs.getString("name"));
+			vo.setPoster("https://www.menupan.com"+rs.getString("poster"));
+			rs.close();
+			
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+		
 		return vo;
 	}
 	// INSERT
