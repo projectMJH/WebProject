@@ -169,11 +169,12 @@ public class FoodDetail extends HttpServlet {
 			out.println("<pre style=\"white-space:pre-wrap;background-color:white;border:none\">"+rvo.getMsg()+"</pre>");
 			out.println("</td>");
 			out.println("</tr>");
-			out.println("<tr id=m"+rvo.getRno()+" class=ups style=\"display:none\">");
+			out.println("<tr id=\"m"+rvo.getRno()+"\" class=ups style=\"display:none\">");
 			out.println("<td>");
-			out.println("<form method=post action=ReplyInsert>");
+			out.println("<form method=post action=ReplyUpdate>");
 			out.println("<textarea rows=4 cols=45 name=msg style=\"float:left\" required>"+rvo.getMsg()+"</textarea>");
 			out.println("<input type=hidden name=fno value="+fno+">");
+			out.println("<input type=hidden name=rno value="+rvo.getRno()+">");
 			out.println("<input type=submit value=댓글수정 class=\"btn-sm btn-primary\"style=\"float:left;width:80px;height:98px\">");
 			out.println("</form>");
 			
@@ -207,9 +208,27 @@ public class FoodDetail extends HttpServlet {
 			out.println("</form>");
 		}
 		out.println("</div>");
+		
 		out.println("<div class=col-sm-4>");
 		out.println("<h3>인기맛집</h3>");
+		List<FoodVO> fList=dao.foodHitTop10();
+		out.println("<table class=\"table table-striped\" style=\"table-layout:fixed\">");
+		out.println("<tr>");
+		out.println("<th class=text-center style=\"width:15%\"></th>");
+		out.println("<th class=text-center style=\"width:61%\">업체명</th>");
+		out.println("<th class=text-center style=\"width:24%\">조회수</th>");
+		out.println("</tr>");
+		for(FoodVO fvo:fList)
+		{
+			out.println("<tr>");
+			out.println("<td class=text-center><img src="+fvo.getPoster()+" width=30 height=30></td>");
+			out.println("<td  style=\"white-space:nowrap;overflow:hidden;text-overflow:ellipsis;\">"+fvo.getName()+"</td>");
+			out.println("<td class=text-center>"+fvo.getHit()+"</td>");
+			out.println("</tr>");
+		}
+		out.println("</table>");
 		out.println("</div>");
+		
 		out.println("</div>");
 
 		out.println("</div>");

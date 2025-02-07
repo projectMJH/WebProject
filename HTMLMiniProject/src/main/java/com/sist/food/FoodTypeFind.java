@@ -70,7 +70,7 @@ public class FoodTypeFind extends HttpServlet {
 		out.println("<body>");
 		out.println("<div class=container>");
 		
-		out.println("<div class=\"row text-center\">");
+		out.println("<div class=\"row text-center\" style=\"margin-top:20px;\">");
 		out.println("<a href=MainServlet?mode=3&type=한식 class=\"btn btn-sm btn-danger\">한식</a>");
 		out.println("<a href=MainServlet?mode=3&type=양식 class=\"btn btn-sm btn-success\">양식</a>");
 		out.println("<a href=MainServlet?mode=3&type=중식 class=\"btn btn-sm btn-info\">중식</a>");

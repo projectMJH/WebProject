@@ -153,4 +153,27 @@ public class ReplyDAO {
 			disConnection();
 		}
 	}
+	//댓글 수정
+	public void replyUpdateData(int rno, String msg)
+	{
+		try
+		{
+			getConnection();
+			String sql="UPDATE reply SET "
+					+ "msg=? "
+					+ "WHERE rno=?";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, msg);
+			ps.setInt(2, rno);
+			ps.executeUpdate();
+			
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+	}
 }

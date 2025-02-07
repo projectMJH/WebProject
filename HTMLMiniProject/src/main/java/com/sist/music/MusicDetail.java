@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.sist.vo.*;
 import com.sist.dao.*;
@@ -76,6 +78,37 @@ public class MusicDetail extends HttpServlet {
 		out.println("</table>");
 		
 		out.println("</div>");
+
+		out.println("<div class=row style=\"margin-top:20px;\">");
+		out.println("<div class=col-sm-8>");
+		out.println("<h3>댓글<h3>");
+		// 댓글 출력
+		ReplyDAO rdao=ReplyDAO.newInstance();
+//		List<ReplyDAO> list=rdao.replyListData(0)
+		
+		out.println("</div>");
+		out.println("<div class=col-sm-4>");
+		out.println("<h3>인기맛집<h3>");
+		// 맛집 출력
+		List<GenieMusicVO> gList=dao.musicHitTop10();
+		out.println("<table class=\"table table-striped\" style=\"table-layout:fixed\">");
+		out.println("<tr>");
+		out.println("<th class=text-center style=\"width:15%\"></th>");
+		out.println("<th class=text-center style=\"width:61%\">타이틀</th>");
+		out.println("<th class=text-center style=\"width:24%\">조회수</th>");
+		out.println("</tr>");
+		for(GenieMusicVO gvo:gList)
+		{
+			out.println("<tr>");
+			out.println("<td class=text-center><img src="+gvo.getPoster()+" width=30 height=30></td>");
+			out.println("<td style=\"white-space:nowrap;overflow:hidden;text-overflow:ellipsis\">"+gvo.getTitle()+"</td>");
+			out.println("<td class=text-center>"+gvo.getHit()+"</td>");
+			out.println("</tr>");
+		}
+		out.println("</table>");
+		out.println("</div>");
+		out.println("</div>");
+		
 		out.println("</div>");
 		out.println("</body>");
 		out.println("</html>");

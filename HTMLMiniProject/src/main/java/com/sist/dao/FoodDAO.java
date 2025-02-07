@@ -8,7 +8,7 @@ public class FoodDAO {
 	private PreparedStatement ps;
 	private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
 	private final int ROWSIZE=12;
-	private final int TABLESIZE=20;
+	private final int TABLESIZE=12;
 	
 	private static FoodDAO dao;
 	public FoodDAO()
@@ -276,7 +276,7 @@ public class FoodDAO {
 			getConnection();
 			String sql="SELECT fno,name,poster,address,type,num "
 					+"FROM (SELECT fno,name,poster,address,type,rownum as num "
-					+"FROM (SELECT fno,name,posteraddress,type "
+					+"FROM (SELECT fno,name,poster,address,type "
 					+"FROM food_menupan "
 					+"WHERE "+col+" LIKE '%'||?||'%')) "
 					+"WHERE num BETWEEN ? AND ?";
@@ -445,7 +445,38 @@ public class FoodDAO {
 		}
 		return vo;
 	}
-	
-
+	// 인기 검색 top 10 
+	public List<FoodVO> foodHitTop10()
+	{
+		List<FoodVO> list = new ArrayList<FoodVO>();
+		try
+		{
+			getConnection();
+			String sql="SELECT fno,name,poster,hit,rownum "
+					+ "FROM (SELECT fno,name,poster,hit "
+					+ "FROM food_menupan ORDER BY hit DESC) "
+					+ "WHERE rownum <= 10";
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next())
+			{
+				FoodVO vo=new FoodVO();
+				vo.setFno(rs.getInt("fno"));
+				vo.setName(rs.getString("name"));
+				vo.setPoster("https://www.menupan.com"+rs.getString("poster"));
+				vo.setHit(rs.getInt("hit"));
+				list.add(vo);
+			}
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+		return list;
+	}
 
 }
