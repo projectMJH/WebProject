@@ -1,0 +1,50 @@
+<!-- 
+	static:
+	relative:
+	
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.a{
+	position: relative;
+	top: 20px;
+	left: 20px;
+	width: 100px;
+	height: 100px;
+	background-color: blue;
+	color: white;
+	
+}
+
+.b{
+	position: relative;
+	width: 200px;
+	height: 200px;
+	left: 20px;
+	top: 10px;
+	background-color: gray;
+}
+.c{
+	position: absolute;
+	top: 30px;
+	left: 30px;
+	width: 100px;
+	height: 100px;
+	background-color: green;
+}
+</style>
+</head>
+<body>
+	<div class="a">Relative1</div>
+	<p>
+	<div class="a">Relative2</div>
+	<p>
+	<div class="b">
+		<div class="c">Absolute</div>
+	</div>
+</body>
+</html>

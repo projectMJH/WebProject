@@ -56,6 +56,7 @@ public class BoardDAO {
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		try
 		{
+			getConnection();
 			String sql="{CALL boardAllData(?,?,?)}";
 			cs=conn.prepareCall(sql);
 			// ?에 값을 채운다

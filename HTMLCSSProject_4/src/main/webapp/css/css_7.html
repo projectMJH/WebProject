@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="table.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+let i=0;
+$(function(){	//window.onload=function() {} => main
+	$('.dataTr').click(function(){
+		if(i==0)
+		{
+			i=1;
+			$('#content').show("slow");
+		}
+		else
+		{
+			i=0;
+			$('#content').hide("slow");
+		}
+	})
+})
+</script>
+</head>
+<body>
+	<table class="table_content" width=700>
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>이름</th>
+			<th>작성일</th>
+			<th>조회수</th>
+		</tr>
+		<tr class="dataTr">
+			<td class="text-center">1</td>
+			<td>트럼프의 ‘펜타닐 전쟁’…7만명 숨지게 한 ‘좀비마약’</td>
+			<td class="text-center">홍길동</td>
+			<td class="text-center">2025-02-05</td>
+			<td class="text-center">10</td>
+		</tr>
+		<tr id="content" style="display:none">
+			<td colspan=5 height=200 class="text-left" valign="top">
+				<pre style="white-space:pre-wrap;">도널드 트럼프 미국 대통령이 중국·멕시코·캐나다에 관세를 부과하겠다며 세 국가에 “펜타닐 문제를 해결하라”고 요구했다. 미국이 관세를 협상 도구로 사용할 만큼 미국 내 마약 문제가 심각하다.
+
+트럼프 대통령은 지난 1일(현지 시각) 관세 행정명령을 내고 “갱단원, 밀수범, 인신매매업자 및 모든 종류의 불법 약물이 우리 국경을 넘어 지역사회로 유입되고 있다”고 주장했다. 중국, 멕시코, 캐나다가 미국으로 펜타닐 등 마약이 흘러 들어가는 걸 수수방관하고 있다는 주장이다.
+
+일명 ‘좀비마약’ 펜타닐은 마약성 진통제로, 헤로인의 50배에 달하는 약효를 보여준다. 최근 수년 동안 펜타닐 불법 유통이 늘면서 오남용 사례도 크게 늘었다. 미국 질병통제예방센터(CDC)에 따르면 펜타닐로 인해 일을 할 수 없게 된 미국 노동자는 2022년 말 기준 630만명에 달한다. 2021년 펜타닐 과다복용으로 인한 사망자는 7만명 정도다.
+
+트럼프 대통령은 이같은 사태를 해결하고자 관세를 무기로 삼았다. 펜타닐이 해외에서 유입된다는 주장이다. 미국은 펜타닐 원료의 최대 수출국으로 중국을 지목했다. 또 이 원료를 밀반입해 펜타닐을 만드는 제조기지가 멕시코와 캐나다에 있다고 본 것이다. 펜타닐은 코카인, 헤로인 등과 달리 실험실에서 손쉽게 합성해 만들 수 있다.
+
+이에 멕시코와 캐나다는 지난 3일 “펜타닐 문제 해결에 적극적으로 나서겠다”고 밝히면서 관세 시행을 한 달 유예했다. 캐나다는 마약 문제를 담당하는 ‘펜타닐 차르’를 임명하고, 국경에서 펜타닐이 통과하지 못하게 국경 보안을 강화하겠다고 전했다. 멕시코 역시 마약 밀매 단속을 위해 국경에 병사 1만명을 배치하겠다고 약속했다. 반면 중국은 “펜타닐은 미국 문제”라는 식으로 대응했다.</pre>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

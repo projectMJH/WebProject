@@ -8,6 +8,7 @@ public class FoodDAO {
 	private PreparedStatement ps;
 	private final String URL="jdbc:oracle:thin:@localhost:1521:XE";
 	private final int ROWSIZE=12;
+	private final int TABLESIZE=20;
 	
 	private static FoodDAO dao;
 	public FoodDAO()
@@ -120,29 +121,13 @@ public class FoodDAO {
 			ps=conn.prepareStatement(sql);
 			ps.executeUpdate();
 			
-			sql="SELECT fno,name,type,phone,address,score,theme,"
+			sql="SELECT name,type,phone,address,score,theme,"
 					+ "poster,images,time,parking,content,hit,price "
 					+"FROM food_menupan "
 					+"WHERE fno="+fno;
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
 			rs.next();
-			/*
-			vo.setFno(rs.getInt(1));
-			vo.setName(rs.getString(2));
-			vo.setType(rs.getString(3));
-			vo.setPhone(rs.getString(4));
-			vo.setAddress(rs.getString(5));
-			vo.setScore(rs.getDouble(6));
-			vo.setTheme(rs.getString(7));
-			vo.setPoster("https://www.menupan.com"+rs.getString(8));
-			vo.setImages(rs.getString(9));
-			vo.setTime(rs.getString(10));
-			vo.setParking(rs.getString(11));
-			vo.setContent(rs.getString(12));
-			vo.setHit(rs.getInt(13));
-			vo.setPrice(rs.getString(14));
-			*/
 			vo.setName(rs.getString("name"));
 			vo.setType(rs.getString("type"));
 			vo.setPhone(rs.getString("phone"));
@@ -194,6 +179,161 @@ public class FoodDAO {
 		}
 		
 		return vo;
+	}
+	// 음식 종류별 검색
+	public List<FoodVO> foodTypeFind(int page, String type)
+	{
+		List<FoodVO> list = new ArrayList<FoodVO>();
+		try
+		{
+			getConnection();
+			String sql="";
+			int start=ROWSIZE*page - (ROWSIZE-1);
+			int end=ROWSIZE*page;
+			if(!type.equals("기타"))
+			{
+				sql="SELECT fno,name,poster,num "
+					+"FROM (SELECT fno,name,poster,rownum as num "
+					+"FROM (SELECT fno,name,poster "
+					+"FROM food_menupan "
+					+"WHERE type LIKE '%'||'"+type+"'||'%')) "
+					+"WHERE num BETWEEN ? AND ?";
+			}
+			else
+			{
+				sql="SELECT fno,name,poster,num "
+						+"FROM (SELECT fno,name,poster,rownum as num "
+						+"FROM (SELECT fno,name,poster "
+						+"FROM food_menupan "
+						+"WHERE NOT REGEXP_LIKE(type, '한식|양식|중식|일식|카페'))) "
+						+"WHERE num BETWEEN ? AND ?";
+			}
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next())
+			{
+				FoodVO vo=new FoodVO();
+				vo.setFno(rs.getInt("fno"));
+				vo.setName(rs.getString("name"));
+				vo.setPoster("https://www.menupan.com"+rs.getString("poster"));
+				list.add(vo);
+			}
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+		return list;
+	}
+	// 음식 종류별 총 페이지 수
+	public int foodTypeTotalPage(String type)
+	{
+		int total=0;
+		try
+		{
+			getConnection();
+			String sql="";
+			if(!type.equals("기타"))
+			{
+				sql="SELECT CEIL(count(*)/"+(double)ROWSIZE+") "
+					+"FROM food_menupan "
+					+"WHERE type LIKE '%'||'"+type+"'||'%'";
+			}
+			else
+			{
+				sql="SELECT CEIL(count(*)/"+(double)ROWSIZE+") "
+					+"FROM food_menupan "
+					+"WHERE NOT REGEXP_LIKE(type, '한식|양식|중식|일식|카페')";
+				// 다중 검색
+			}
+			ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			total=rs.getInt(1);
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+		return total;		
+	}
+	// ?page= &col= &fd=
+	public List<FoodVO> foodFind(int page, String col, String fd)
+	{
+		List<FoodVO> list = new ArrayList<FoodVO>();
+		try
+		{
+			getConnection();
+			String sql="SELECT fno,name,poster,address,type,num "
+					+"FROM (SELECT fno,name,poster,address,type,rownum as num "
+					+"FROM (SELECT fno,name,posteraddress,type "
+					+"FROM food_menupan "
+					+"WHERE "+col+" LIKE '%'||?||'%')) "
+					+"WHERE num BETWEEN ? AND ?";
+			ps=conn.prepareStatement(sql);
+
+			int start=TABLESIZE*page - (TABLESIZE-1);
+			int end=TABLESIZE*page;
+			ps.setString(1, fd);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next())
+			{
+				FoodVO vo=new FoodVO();
+				vo.setFno(rs.getInt("fno"));
+				vo.setName(rs.getString("name"));
+				vo.setPoster("https://www.menupan.com"+rs.getString("poster"));
+				vo.setAddress(rs.getString("address"));
+				vo.setType(rs.getString("type"));
+				list.add(vo);
+			}
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+		return list;
+	}
+	// 검색별 총 페이지 수
+	public int foodFindTotalPage(String col,String fd)
+	{
+		int total=0;
+		try
+		{
+			getConnection();
+			String sql="SELECT CEIL(count(*)/"+(double)TABLESIZE+") "
+					+"FROM food_menupan "
+					+"WHERE "+col+" LIKE '%'||?||'%'";
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, fd);
+			ResultSet rs=ps.executeQuery();
+			rs.next();
+			total=rs.getInt(1);
+			rs.close();
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		finally
+		{
+			disConnection();
+		}
+		return total;		
 	}
 	// INSERT
 	public void foodInsertData(FoodVO vo)
@@ -251,6 +391,8 @@ public class FoodDAO {
 		return bCheck;
 		
 	}
+	
+	
 
 
 }

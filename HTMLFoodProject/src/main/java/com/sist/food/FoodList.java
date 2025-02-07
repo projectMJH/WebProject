@@ -44,7 +44,6 @@ public class FoodList extends HttpServlet {
 		 */
 		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
 		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
-		
 		if(endPage>totalpage)
 			endPage=totalpage;
 				

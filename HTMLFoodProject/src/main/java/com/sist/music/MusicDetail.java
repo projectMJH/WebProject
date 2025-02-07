@@ -54,9 +54,11 @@ public class MusicDetail extends HttpServlet {
 		out.println("<td width=20% style=\"color:gray\">좋아요!</td>");
 		out.println("<td width=50%>"+vo.getHit()+"</td>");
 		out.println("</tr>");
+		out.println("</table>");
 		
+		out.println("<table class=table>");
 		out.println("<tr>");
-		out.println("<td class=text-right colspan=3>");
+		out.println("<td class=text-right>");
 		out.println("<a href=# class=\"btn btn-xs btn-danger\">좋아요</a>");
 		out.println("<a href=# class=\"btn btn-xs btn-success\">찜하기</a>");
 		out.println("<a href=# class=\"btn btn-xs btn-info\">예약</a>");

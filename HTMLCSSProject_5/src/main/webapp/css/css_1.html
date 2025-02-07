@@ -1,0 +1,131 @@
+<!-- 
+	194 page 위치속성
+	주요속성
+	1. 텍스트 속성
+		font-size: 글자 크기 (px, em(배수), %)
+				   => 기본 16px
+		font-family: 글꼴
+					 시스템 / 구글폰트
+		font-weight: bold => 강조
+		
+		color: 글자 색상
+			   = red, gray			 		   
+			   = rgb(255,255,255) = 그림판 			 		   
+			   = 16진법 => #FFF => 그림판 / HTML 색상표
+			   = rgba() => 투명 모드
+			   		- 0.0 ~ 1.0	
+		<a> => text-decoration:none / underline / overline
+			   line-through (취소선)
+		text-align: 정렬(수평) => <table>
+					left / center / right => default(left)
+		vertical-align: 정렬(수직) => <div> <table>
+					top / middle / bottom => default(middle)
+		white-space: 줄바꿈	=> <pre> 태그는 line 길이를 그대로 출력 
+							=> table size에 맞추어 줄바꿈을 하려면 <pre white-space:pre-wrap> 설정 필요
+		line-height: 자간 (줄 간격)
+		word-space: 글자 간격							 	   				 		   
+	2. background 속성 => 174~183 page
+	    background-color: 배경색
+	    background-image: 배경 이미지
+	    	=> background-image: url("경로명"|url주소)
+	    	=> 크롤링 => style="background-image:url()"
+	    	=> img(80%) / background(20%)
+	    background-repeat: 반복 => 이미지가 작은 경우
+	    				no-repeat / repeat(default)
+	    background-size: width/height, cover (축소/확대)
+	    ---------------------------------------------
+	    	통합: background					
+	    	=>
+	3. 박스 모델
+			margin / padding / border / content
+		= 외부 여백: 브라우저와 태그의 간격
+				  태그와 태그 사이의 간격
+				  margin
+				  ------
+				  	margin-top => 위 아래 간격
+				  	margin-right => 좌우 간격
+				  	margin-bottom => border
+				  	margin-left => 오른쪽에 추가
+				  	--------------
+				  		통합: margin: top right bottom left
+				  			=> 시계방향
+				  			
+		= 내부 여백: 태그 안에 있는 텍스트 / 이미지의 여백
+				padding
+				-------
+					padding-top
+					padding-right
+					padding-bottom
+					padding-left
+					------------------
+						통합: padding: top right bottom left
+		--------------------------------------------------------
+						속기법 : top/bottom, left/right
+						       ----------  ----------				
+		= 테두리
+		  border
+		  ------
+		  	border-width: 두께
+		  	border-color: 색상
+		  	border-style: 출력형태 => 선의 종류
+		  				  => solid, dotted, dashed, 
+		  	----------------------------------------
+		  		통합: border: 20px solid red;
+		  	border-radius: 타원
+		  	-------------
+		  		border-radius: 왼쪽 위, 오른쪽 위, 오른쪽 아래, 왼쪽 아래
+		  	border-collapse: 라인선 통항 <table>		
+		  		 			  
+	4. 가시성 속성
+		display
+		-------
+			태그 => 브라우저 범위를 벗어나면 자동 줄바꿈
+			---
+				block: system.out.println() => 세로 출력
+					=> 태그가 한줄 전체 차지
+					=> 	<div>
+						<h1> ~ <h6>
+						<p> <br> <hr> <ul> <ol> <dl> <table>
+				inline: system.out.print() => 가로 출력
+					=> 지정된 크기만큼만 차지
+					=> 	<img> <a> <input> <select>
+						<textarea> <span> <b> <i>
+						<strong> ...
+			1) 감추는 경우
+			   ------- display: none;
+			2) 속성변경
+			   ------
+			   display: block	  				
+			   display:	inline  				
+			   display:	inline-block  				
+						=> 변경 대상에 width/height를 변경
+			3) 테이블 사용을 하지 말라 (권장)
+			   -----------------			
+				=> 웹접근표준 => 만약에 사용 <caption>
+				=> 테이블의 단점: 자동으로 늘어난다
+				display: table 			=> <table>
+				display: table-row 		=> <tr>
+				display: table-cell 	=> <td>
+				display: table-column 	=> <th>
+				display: table-caption 	=> <caption>
+			4) display => javascript	
+	5. 목록 속성
+	6. 위치 속성
+	7. 기타
+	8. 화면 분할
+	9. 반응형 웹
+	10. CSS 라이브러리 => BootStrap / TailWind => CSS가 제작	
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<center></center>
+	<h1></h1>
+	<table>
+	</table>
+</body>
+</html>

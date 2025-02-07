@@ -1,4 +1,4 @@
-package com.sist.board; 
+package com.sist.board;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,13 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import com.sist.dao.*;
 import com.sist.vo.*;
-import java.util.*;
 
-// tomcat => 9버전 까지 => javax.servlet.*
-// tomcat => 10버전 이상 => jakarta.servlet.* (html v5.0)
 @WebServlet("/BoardList")
 public class BoardList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
