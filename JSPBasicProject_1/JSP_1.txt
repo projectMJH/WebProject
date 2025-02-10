@@ -1,0 +1,29 @@
+JSP 내 태그 구분
+<% %>       : java source (_jspService 메서드 내)
+<%-- --%>   : 주석(코멘트)
+<%= %>      : 출력 out.println() 
+<%! %>      : 전역변수, 메서드 선언 등...
+
+<%!
+    int a=10;
+    public void add(){}
+%>
+<%
+    int b=20;
+%>
+<%=b %>
+
+class A extends HttpServlet
+{
+    --------------------
+    int a=10;
+    public void add(){}
+    --------------------
+    public void _jspService()
+    {
+        intb=20; out.println(b);
+    }
+}
+
+JSP -> Servlet class 저장 장소
+C:\webDev\webStudy\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\JSPBasicProject_1\org\apache\jsp\jsp

@@ -87,6 +87,7 @@ public class MusicDetail extends HttpServlet {
 //		List<ReplyDAO> list=rdao.replyListData(0)
 		
 		out.println("</div>");
+		
 		out.println("<div class=col-sm-4>");
 		out.println("<h3>인기맛집<h3>");
 		// 맛집 출력
