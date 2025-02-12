@@ -32,7 +32,7 @@ REGDATE          DATE
  */
 @Data
 public class ReplyVO {
-	private int rno,fno;
+	private int rno,fno,mno;
 	private String id,name,msg,dbday;
 	private Date regdate;
 }

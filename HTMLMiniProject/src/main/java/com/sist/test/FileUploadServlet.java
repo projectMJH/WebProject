@@ -1,27 +1,56 @@
 package com.sist.test;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import jakarta.servlet.http.Part;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import java.io.*;
 
+//import com.oreilly.servlet.MultipartRequest;
+//import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+
+@MultipartConfig(
+	    fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+	    maxFileSize = 1024 * 1024 * 10,      // 10MB
+	    maxRequestSize = 1024 * 1024 * 50    // 50MB
+)
 @WebServlet("/FileUploadServlet")
 public class FileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try
-		{
-			String path="c:\\upload";
-			String enctype="UTF-8";
-			int size=1024*1024*100;
-			
-		}catch(Exception ex) {}
+	    response.setContentType("text/html;charset=UTF-8");
+	    System.out.println("연결...");
+	    Part filePart = request.getPart("file");
+        String fileName = filePart.getSubmittedFileName();
+        System.out.println("fileName="+fileName);
+        
+        if(fileName==null || fileName.equals(""))
+        {
+        	//System.out.println("파일 없음");
+        	response.getWriter().println("<h1 style=\"color:red\">파일없이 성공적으로 저장되었습니다!</h1>");
+        }
+        else 
+        {
+	        // 업로드된 파일을 저장할 디렉토리를 정의합니다.
+	        String uploadDir = "c:\\upload";
+	        File file = new File(uploadDir, fileName);
+
+	        try (InputStream input = filePart.getInputStream(); FileOutputStream output = new FileOutputStream(file)) {
+	            byte[] buffer = new byte[1024];
+	            int length;
+	            while ((length = input.read(buffer)) > 0) {
+	                output.write(buffer, 0, length);
+	            }
+	        }
+            
+	        response.getWriter().println("<h1 style=\"color:blue\">파일이 성공적으로 업로드되었습니다!</h1>");
+        }
 	}
 
 }

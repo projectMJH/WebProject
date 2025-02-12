@@ -149,7 +149,7 @@ public class FoodDetail extends HttpServlet {
 			out.println("<table class=table>");
 			out.println("<tr>");
 			out.println("<td class=text-left>");
-			out.println("◑"+rvo.getName()+"%nbsp;(");
+			out.println("◑"+rvo.getName()+"&nbsp;(");
 			out.println(rvo.getDbday()+")");
 			out.println("</td>");
 			out.println("<td class=text-right>");
@@ -201,7 +201,7 @@ public class FoodDetail extends HttpServlet {
 			out.println("<td>");
 			out.println("<textarea rows=4 cols=58 name=msg style=\"float:left\" required></textarea>");
 			out.println("<input type=hidden name=fno value="+fno+">");
-			out.println("<input type=submit value=댓글쓰기 class=\"btn-sm btn-primary\"style=\"float:left;width:80px;height:98px\">");
+			out.println("<input type=submit value=댓글쓰기 class=\"btn-sm btn-primary\" style=\"float:left;width:80px;height:98px\">");
 			out.println("</td>");
 			out.println("</tr>");
 			out.println("</table>");

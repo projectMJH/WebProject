@@ -58,7 +58,7 @@ public class ReplyMusicDAO {
 			String sql="INSERT INTO replymusic VALUES("
 					+"rm_rno_seq.nextval,?,?,?,?,SYSDATE)";
 			ps=conn.prepareStatement(sql);
-			ps.setInt(1, vo.getFno());
+			ps.setInt(1, vo.getMno());
 			ps.setString(2, vo.getId());
 			ps.setString(3, vo.getName());
 			ps.setString(4, vo.getMsg());
@@ -73,16 +73,16 @@ public class ReplyMusicDAO {
 		}
 	}
 	// 목록보기
-	public List<ReplyVO> replyListData(int fno)
+	public List<ReplyVO> replyListData(int mno)
 	{
 		List<ReplyVO> list=new ArrayList<ReplyVO>();
 		try
 		{
 			getConnection();
-			String sql="SELECT rno,fno,id,name,msg,"
+			String sql="SELECT rno,mno,id,name,msg,"
 					+ "TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') dbday "
 					+ "FROM replymusic "
-					+ "WHERE fno="+fno
+					+ "WHERE mno="+mno
 					+ "ORDER BY rno DESC";
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
@@ -90,7 +90,7 @@ public class ReplyMusicDAO {
 			{
 				ReplyVO vo=new ReplyVO();
 				vo.setRno(rs.getInt("rno"));
-				vo.setFno(rs.getInt("fno"));
+				vo.setMno(rs.getInt("mno"));
 				vo.setId(rs.getString("id"));
 				vo.setName(rs.getString("name"));
 				vo.setMsg(rs.getString("msg"));
