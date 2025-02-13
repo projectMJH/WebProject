@@ -96,9 +96,13 @@ public class MusicDetail extends HttpServlet {
 			out.println("◑"+rvo.getName()+"&nbsp;(");
 			out.println(rvo.getDbday()+")");
 			out.println("</td>");
-			out.println("</tr>");
-			out.println("<tr>");
-
+			out.println("<td class=text-right>");
+			if(rvo.getId().equals(id))
+			{
+				out.println("<span class=\"btn btn-xs btn-success update\" data-rno="+rvo.getRno()+">수정</span>");
+				out.println("<a href=ReplyMusicInsert?mno="+rvo.getMno()+"&rno="+rvo.getRno()+" class=\"btn btn-xs btn-info\">삭제</a>");
+			}
+			out.println("</td>");
 			out.println("</tr>");
 			out.println("<tr>");
 			out.println("<td colspan=2>");
@@ -134,7 +138,7 @@ public class MusicDetail extends HttpServlet {
 		
 		out.println("<div class=col-sm-4>");
 		out.println("<h3>인기음악<h3>");
-		// 맛집 출력
+		// 인기 음악 출력
 		List<GenieMusicVO> gList=dao.musicHitTop10();
 		out.println("<table class=\"table table-striped\" style=\"table-layout:fixed\">");
 		out.println("<tr>");
