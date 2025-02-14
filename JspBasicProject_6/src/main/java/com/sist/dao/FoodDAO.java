@@ -134,13 +134,14 @@ public class FoodDAO {
 				ps=conn.prepareStatement(sql);
 				ps.executeUpdate();
 			}
-			sql="SELECT name,type,phone,address,score,theme,"
+			sql="SELECT fno,name,type,phone,address,score,theme,"
 					+ "poster,images,time,parking,content,hit,price "
 					+"FROM food_menupan "
 					+"WHERE fno="+fno;
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
 			rs.next();
+			vo.setFno(rs.getInt("fno"));
 			vo.setName(rs.getString("name"));
 			vo.setType(rs.getString("type"));
 			vo.setPhone(rs.getString("phone"));
