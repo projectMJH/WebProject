@@ -194,7 +194,7 @@ public class FoodDAO {
 			{
 				sql="SELECT fno,name,poster,num "
 					+"FROM (SELECT fno,name,poster,rownum as num "
-					+"FROM (SELECT fno,name,poster "
+					+"FROM (SELECT /*+INDEX_ASC(food_menupan fm_fno_pk) */ fno,name,poster "
 					+"FROM food_menupan "
 					+"WHERE type LIKE '%'||'"+type+"'||'%')) "
 					+"WHERE num BETWEEN ? AND ?";
@@ -276,7 +276,7 @@ public class FoodDAO {
 			getConnection();
 			String sql="SELECT fno,name,poster,address,type,num "
 					+"FROM (SELECT fno,name,poster,address,type,rownum as num "
-					+"FROM (SELECT fno,name,poster,address,type "
+					+"FROM (SELECT /*+ INDEX_ASC(food_menupan fm_fno_pk)*/ fno,name,poster,address,type "
 					+"FROM food_menupan "
 					+"WHERE "+col+" LIKE '%'||?||'%')) "
 					+"WHERE num BETWEEN ? AND ?";

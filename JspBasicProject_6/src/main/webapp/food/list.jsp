@@ -97,8 +97,9 @@ p{
             </ul>
         </div>
         <div class="row">
-            <h3>최근 방문 맛집</h3>
+            <h3>최근 방문 맛집&nbsp;&nbsp;
             <a href="cookie_all_delete.jsp" class="btn btn-sm btn-primary">전체 삭제</a>
+            </h3>
             <hr>
             <%
                 List<FoodVO> cList=new ArrayList<FoodVO>();

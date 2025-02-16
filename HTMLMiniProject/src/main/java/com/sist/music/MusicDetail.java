@@ -113,7 +113,7 @@ public class MusicDetail extends HttpServlet {
 			out.println("<td>");
 			out.println("<form method=post action=ReplyMusicUpdate>");
 			out.println("<textarea rows=4 cols=45 name=msg style=\"float:left\" required>"+rvo.getMsg()+"</textarea>");
-			out.println("<input type=hidden name=fno value="+mno+">");
+			out.println("<input type=hidden name=mno value="+mno+">");
 			out.println("<input type=hidden name=rno value="+rvo.getRno()+">");
 			out.println("<input type=submit value=댓글수정 class=\"btn-sm btn-primary\"style=\"float:left;width:80px;height:98px\">");
 			out.println("</form>");
