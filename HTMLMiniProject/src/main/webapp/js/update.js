@@ -1,22 +1,16 @@
-let bCheck=true
 $(function(){
-	$('.ups').hide()
-	// let a=document.getElementClassName("ups")
-	// a.style.display=none
 	$('.update').click(function(){
-		let rno=$(this).attr('data-rno')
-		$('.ups').hide();
-		if(bCheck==true)
-		{
-			$('#m'+rno).show();
-			$(this).text("취소")
-			bCheck=false;
+		let rno = $(this).attr('data-rno');
+		let targetRow = $('#m' + rno);
+
+		if(targetRow.is(':visible')) {
+			targetRow.hide();
+			$(this).text("수정");
+		} else {
+			$('.ups').hide(); // 다른 열린 요소 닫기
+			$('.update').text("수정"); // 다른 버튼 텍스트 초기화
+			targetRow.show();
+			$(this).text("취소");
 		}
-		else
-		{
-			$('#m'+rno).show();
-			$(this).text("수정")
-			bCheck=true;
-		}	
-	})
-})
+	});
+});

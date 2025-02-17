@@ -27,7 +27,7 @@ public class ReplyMusicInsert extends HttpServlet {
 		ReplyMusicDAO dao=ReplyMusicDAO.newInstance();
 		dao.replyDeleteData(Integer.parseInt(rno), id);
 		
-		response.sendRedirect("MainServlet?mode=22");
+		response.sendRedirect("MainServlet?mode=22&mno="+mno);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

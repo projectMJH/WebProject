@@ -31,6 +31,7 @@ public class MusicDetail extends HttpServlet {
 		out.println("<head>");
 		out.println("<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css\">");
 		out.println("<link rel=stylesheet href=css/music.css>");
+		out.println("<script src=js/update.js></script>");
 		out.println("</head>");
 		out.println("<body>");
 		out.println("<div class=container>");

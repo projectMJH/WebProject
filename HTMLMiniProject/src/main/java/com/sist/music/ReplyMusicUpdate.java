@@ -17,7 +17,7 @@ public class ReplyMusicUpdate extends HttpServlet {
 		String rno=request.getParameter("rno");
 		String msg=request.getParameter("msg");
 		
-		ReplyDAO dao=ReplyDAO.newInstance();
+		ReplyMusicDAO dao=ReplyMusicDAO.newInstance();
 		dao.replyUpdateData(Integer.parseInt(rno), msg);
 		response.sendRedirect("MainServlet?mode=22&mno="+mno);
 	}	
