@@ -2,3 +2,34 @@ BootStrap 링크
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 맛집지도맵 앱키 JavaScript 키: 3b23ac7a514b4ffeb31b92fb00565fcb
+
+tomcat server.xml 
+      <Context docBase="JSPBasicProject_6" path="/JSPBasicProject_6" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_6">
+        <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="8" maxIdle="8" maxWait="-1" name="jdbc/oracle" password="happy" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:XE" username="hr"/>
+      </Context>
+      
+      <Context docBase="JSPFrontProject_1" path="/JSPFrontProject_1" reloadable="true" source="org.eclipse.jst.jee.server:JSPFrontProject_1"/>
+      <Context docBase="JSPBasicProject_7" path="/JSPBasicProject_7" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_7">
+        <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="8" maxIdle="8" maxWait="-1" name="jdbc/oracle" password="happy" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:XE" username="hr"/>
+      </Context>
+      <Context docBase="JSPBasicProject_8" path="/JSPBasicProject_8" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_8">
+        <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="8" maxIdle="8" maxWait="-1" name="jdbc/oracle" password="happy" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:XE" username="hr"/>
+      </Context>
+      
+      
+          <Host>
+      <Context docBase="JSPBasicProject_6" path="/JSPBasicProject_6" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_6">
+        <Resource
+            driverClassName="oracle.jdbc.driver.OracleDriver"
+            url="jdbc:oracle:thin:@localhost:1521:XE"
+            username="hr"
+            password="happy"
+            maxActive="10"
+            maxIdle="8"
+            maxWait="-1"
+            auth="Container"
+            type="javax.sql.DataSource"
+            name="jdbc/oracle"
+        />
+      </Context>
+    </Host>
