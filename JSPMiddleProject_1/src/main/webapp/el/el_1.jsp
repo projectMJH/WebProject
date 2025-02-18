@@ -1,6 +1,88 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%--
+      => MVC / Spring / Spring-Boot / 실무
+      EL : 표현식 (브라우저에 데이터 출력) <%= %>
+           ${출력할 데이터}
+      JSTL : 태그형 라이브러리 => 자바의 제어문 , 변수선언 , 화면이동 
+                              날짜변환 , 숫자 변환 
+      JSP : 태그형 라이브러리 => 자바를 사용하지 않는다 
+            HTML + Java 
+             | => 결과값만 출력 (Front) 
+                                | 자바스크립트 => Jquery 
+                                   | Ajax / Axios 
+      구조 : 자바에서 전송 => JSTL+EL => 화면 출력 
+            1차 => MVC , 2차 => Spring 
+            -------------------------- JSP는 변경이 없다
+            
+      동작 
+             요청 
+        JSP =====> Java =====> 요청처리 =====> JSP
+                               ------       ----
+                                |             |
+                                ---------------
+                                 request / session에 값을 담는다
+                                 -----------------
+                                  | ${} => request.getAttribute
+                                  | setAttribute()  
+        => 출력시 
+           연산처리 => 조건 , 출력 (EL) 
+             산술연산자 : + , - , * , / , %
+                                       --
+                                        % mod
+                                   -- 정수/정수=실수  / 대신 div
+                       == 순수하게 덧셈만 가능 
+                       == 문자여 결합 ( =+ )
+                ** ${"10"+10}
+                    ----- 자동으로 Integer.parseInt("10") => 정수변경
+                    ----- 결과값 20
+                
+                ** ${null + 10}
+                     ----- 자동으로 0으로 대체
+                ** EL에서 처리는 문자 / 날짜도 사용한다 
+                              ----------
+             비교연산자 => 결과값은 true/false 
+                        문자 / 날짜도 비교가 가능 
+                == (eq) ,  != (ne) , < (gt) , > (lt) ,
+                <= (le) , >= (ge)
+                ${10==10} ${10 eq 10}
+                => ${vo.id==sessionScope.id}
+                   ${vo.id eq sessionScope.id}
+                => ${sessionScope.id==null} => 로그인이 안된 상태
+             논리연산자 
+                && (and) , || (or) 
+                           => 병렬 (한개 이상 조건이 true => true)
+                              범위 미포함 
+                  => 직렬 (두개의 조건이 true=true) : 범위 포함
+             비교연산자 / 논리연산자 => 
+                       <c:if test="EL"> => if() 
+                       <c:when test="EL"> => switch
+             삼항연산자 => ${조건?값:값}
+                          --- -- --
+                           true
+                           false
+           출력형식 
+             => ${데이터출력}
+                  -------- 일반 변수는 사용할 수 없다 
+                   | request에 담긴값
+                     request.setAttribute("id","hong")
+                     ${requestScope.id}
+                                    --- 키
+                     => <%= request.getAttribute("id")%>
+                     => requestScope는 생략이 가능 
+                     => ${id}
+                   | session에 담긴값 
+                     session.setAttribute("id","admin");
+                     => <%= session.getAttribute("id") %>
+                     => ${sessionScope.id} 
+                                       -- 키
+                     => sessionScope는 생략이 가능 
+                   => request/session 
+                      ------- 우선순위
+                      
+                   *** ${id} => request 
+                   *** ${sessionScope.id} => session
+                     
         => 제어문 (JSTL) => JSP => MVC 사용시에는 자바를 사용하지 않는다
            ----------- 자바가 없는 것처럼 보인다 => 자바 제어문
                        ----------------- 태그로 만들어진 라이브러리
@@ -13,6 +95,15 @@
                                 <c:if test="${조건문(논리/비교}">
                                       ---- 조건문이 수행
                                   조건이 true면 수행하는 HTML을 사용
+                                </c:if>
+
+                                <c:if test="${조건문(논리/비교)}">
+                                      ---- 조건문이 수행
+                                  조건이 true면 수행하는 HTML을 사용 
+                                </c:if>
+                                <c:if test="${!조건문(논리/비교)}">
+                                      ---- 조건문이 수행
+                                  조건이 true면 수행하는 HTML을 사용 
                                 </c:if>
                    선택문: 다중 조건문 사용
                          <c:choose>

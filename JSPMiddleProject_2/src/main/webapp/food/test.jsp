@@ -10,10 +10,12 @@
 <script type="text/javascript">
 let sel=0;
 var IMP = window.IMP; 
-IMP.init("imp68206770"); 
+IMP.init("imp10317234"); 
+//IMP.init("imp68206770");  강사님 식별코드
 function requestPay() {
     IMP.request_pay({
-        pg: "html5_inicis",
+//        pg: "html5_inicis",     // 강사님 PG Provider
+        pg: "nice_v2",     
         pay_method: "card",
         merchant_uid: "ORD20180131-0000011",   // 주문번호
         name: "상품명",
