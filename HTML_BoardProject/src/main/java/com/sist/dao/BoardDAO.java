@@ -253,10 +253,10 @@ public class BoardDAO {
 			if(vo.getPwd().equals(dbPwd))
 			{
 				bCheck=true;
-				sql="UPDATE INTO htmlBoard SET "
+				sql="UPDATE htmlBoard SET "
 					+"name="+vo.getName()
-					+"subject="+vo.getSubject()
-					+"content="+vo.getContent()
+					+",subject="+vo.getSubject()
+					+",content="+vo.getContent()
 					+"WHERE no="+vo.getNo();
 				ps=conn.prepareStatement(sql);
 				ps.executeUpdate();

@@ -28,11 +28,11 @@
             </table>   
             <table class="table">
                 <tr>
-                    <th widhth=10% class="text-center">번호</th>
-                    <th widhth=45% class="text-center">제목</th>
-                    <th widhth=15% class="text-center">이름</th>
-                    <th widhth=20% class="text-center">작성일</th>
-                    <th widhth=10% class="text-center">조회수</th>
+                    <th width=10% class="text-center">번호</th>
+                    <th width=45% class="text-center">제목</th>
+                    <th width=15% class="text-center">이름</th>
+                    <th width=20% class="text-center">작성일</th>
+                    <th width=10% class="text-center">조회수</th>
                 </tr>
                 <c:forEach var="vo" items="${list }">
                     <tr>
