@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <!-- 스프링에서 package등록하는 태그 -->
+    <context:component-scan basePackage="com.sist.model"/>
+    <!-- 개별 클래스로 등록할 때는 <bean> 태그 사용 -->
+</beans>

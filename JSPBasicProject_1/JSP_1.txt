@@ -25,5 +25,3 @@ class A extends HttpServlet
     }
 }
 
-JSP -> Servlet class 저장 장소
-C:\webDev\webStudy\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\JSPBasicProject_1\org\apache\jsp\jsp

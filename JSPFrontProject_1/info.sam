@@ -1,23 +1,17 @@
-BootStrap 링크
+***JSP -> Servlet class 저장 장소=========================
+C:\webDev\webStudy\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work
+  \Catalina\localhost\JSPBasicProject_1\org\apache\jsp\jsp
+
+***BootStrap 링크 ========================
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-맛집지도맵 앱키 JavaScript 키: 3b23ac7a514b4ffeb31b92fb00565fcb
+***맛집지도맵 앱키 ======================== 
+JavaScript 키: 3b23ac7a514b4ffeb31b92fb00565fcb
 
-tomcat server.xml 
-      <Context docBase="JSPBasicProject_6" path="/JSPBasicProject_6" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_6">
-        <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="8" maxIdle="8" maxWait="-1" name="jdbc/oracle" password="happy" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:XE" username="hr"/>
-      </Context>
-      
-      <Context docBase="JSPFrontProject_1" path="/JSPFrontProject_1" reloadable="true" source="org.eclipse.jst.jee.server:JSPFrontProject_1"/>
-      <Context docBase="JSPBasicProject_7" path="/JSPBasicProject_7" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_7">
-        <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="8" maxIdle="8" maxWait="-1" name="jdbc/oracle" password="happy" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:XE" username="hr"/>
-      </Context>
-      <Context docBase="JSPBasicProject_8" path="/JSPBasicProject_8" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_8">
-        <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="8" maxIdle="8" maxWait="-1" name="jdbc/oracle" password="happy" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:XE" username="hr"/>
-      </Context>
-      
-      
-          <Host>
+
+***<tomcat server.xml> 내 DBCP 정의 ======================== 
+          
+    <Host>
       <Context docBase="JSPBasicProject_6" path="/JSPBasicProject_6" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_6">
         <Resource
             driverClassName="oracle.jdbc.driver.OracleDriver"
@@ -33,3 +27,65 @@ tomcat server.xml
         />
       </Context>
     </Host>
+    ----------------------------------------------------------------------------
+      <Context docBase="JSPBasicProject_6" path="/JSPBasicProject_6" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_6">
+        <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="8" maxIdle="8" maxWait="-1" name="jdbc/oracle" password="happy" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:XE" username="hr"/>
+      </Context>
+      
+      <Context docBase="JSPFrontProject_1" path="/JSPFrontProject_1" reloadable="true" source="org.eclipse.jst.jee.server:JSPFrontProject_1"/>
+      <Context docBase="JSPBasicProject_7" path="/JSPBasicProject_7" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_7">
+        <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="8" maxIdle="8" maxWait="-1" name="jdbc/oracle" password="happy" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:XE" username="hr"/>
+      </Context>
+      <Context docBase="JSPBasicProject_8" path="/JSPBasicProject_8" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_8">
+        <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="8" maxIdle="8" maxWait="-1" name="jdbc/oracle" password="happy" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:XE" username="hr"/>
+      </Context>
+
+*** 결재처리 - portone script ========================
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+let sel=0;
+var IMP = window.IMP; 
+IMP.init(""); 
+function requestPay(json,name,price) {
+    IMP.request_pay({
+        pg: "html5_inicis",
+        pay_method: "card",
+        merchant_uid: "ORD20180131-0000011",   // 주문번호
+        name: name,
+        amount: price,         // 숫자 타입
+        buyer_email: json.email,
+        buyer_name: json.name,
+        buyer_tel: json.phone,
+        buyer_addr: json.address,
+        buyer_postcode: json.post
+    }, function (rsp) { // callback
+     });
+}
+
+*** JSP 내 태그 구분 ========================================
+<% %>       : java source (_jspService 메서드 내)
+<%-- --%>   : 주석(코멘트)
+<%= %>      : 출력 out.println() 
+<%! %>      : 전역변수, 메서드 선언 등...
+
+<%!
+    int a=10;
+    public void add(){}
+%>
+<%
+    int b=20;
+%>
+<%=b %>
+
+class A extends HttpServlet
+{
+    --------------------
+    int a=10;
+    public void add(){}
+    --------------------
+    public void _jspService()
+    {
+        intb=20; out.println(b);
+    }
+}
