@@ -63,7 +63,8 @@ public class DispatcherServlet extends HttpServlet {
 			clsList=com.sist.controller.FileReader.componentScan(file.getPath(), pack);
 		}catch(Exception ex) 
 		{
-			System.out.println("== class DispatcherServlet(init) ===================");
+            StackTraceElement el = ex.getStackTrace()[0]; // 예외가 발생한 첫 번째 위치
+			System.out.println("== class "+el.getClassName()+"("+el.getMethodName()+") ===================");
 			System.out.println(ex.getMessage());
 		}
 	}
@@ -124,7 +125,8 @@ public class DispatcherServlet extends HttpServlet {
 			
 		}catch(Exception ex)
 		{
-			System.out.println("== class DispatcherServlet(service) ===================");
+            StackTraceElement el = ex.getStackTrace()[0]; // 예외가 발생한 첫 번째 위치
+			System.out.println("== class "+el.getClassName()+"("+el.getMethodName()+") ===================");
 			System.out.println(ex.getMessage());
 		}
 	}

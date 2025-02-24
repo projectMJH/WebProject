@@ -26,7 +26,8 @@ public class FileReader {
 			}
 		}catch(Exception ex)
 		{
-			System.out.println("== class FileReader(componentScan) ===================");
+            StackTraceElement el = ex.getStackTrace()[0]; // 예외가 발생한 첫 번째 위치
+			System.out.println("== class "+el.getClassName()+"("+el.getMethodName()+") ===================");
 			System.out.println(ex.getMessage());
 		}
 		return list;
