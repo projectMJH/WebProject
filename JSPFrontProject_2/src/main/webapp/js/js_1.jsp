@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%--
+        page 294
         1. HTML/CSS : 브라우저에 출력(XML)
         2. Java : 오라클 연결 / 브라우저 연결
                   데이터 관리
@@ -155,7 +156,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>js_1.jsp</title>
 </head>
 <body>
 

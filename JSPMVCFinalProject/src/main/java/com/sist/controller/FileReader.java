@@ -29,6 +29,7 @@ public class FileReader {
             StackTraceElement el = ex.getStackTrace()[0]; // 예외가 발생한 첫 번째 위치
 			System.out.println("== class "+el.getClassName()+"("+el.getMethodName()+") ===================");
 			System.out.println(ex.getMessage());
+			ex.printStackTrace();
 		}
 		return list;
 	}

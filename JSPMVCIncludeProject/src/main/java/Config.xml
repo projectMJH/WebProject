@@ -21,5 +21,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     </environments>
     <mappers>
         <mapper resource="com/sist/mapper/food-mapper.xml"/>
+        <mapper resource="com/sist/mapper/emp-mapper.xml"/>
     </mappers>
 </configuration>
