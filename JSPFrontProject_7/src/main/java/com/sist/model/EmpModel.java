@@ -63,7 +63,7 @@ public class EmpModel {
   public String food_list(HttpServletRequest request,
 		  HttpServletResponse resposne)
   {
-	  return "../food/list.jsp";
+	  return "../food/list.jsp"; 
   }
   // HTML을 출력 => 읽기 => String 
   // JSON을 출력 => 읽기 => void
