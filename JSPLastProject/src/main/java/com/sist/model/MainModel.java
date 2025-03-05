@@ -5,13 +5,24 @@ import com.sist.controller.RequestMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.*;
+import com.sist.vo.*;
+import com.sist.dao.*;
 
 @Controller
 public class MainModel {
 	@RequestMapping("main/main.do")
 	public String main_main(HttpServletRequest request,HttpServletResponse response)
 	{
-		//request.setAttribute("main_jsp", "../main/home.jsp");
+		FoodVO vo=FoodDAO.foodMainHouseData();
+		List<FoodVO> fList=FoodDAO.foodMainHouseData8();
+		// chefList => recipeList => newsList => cookieList
+		request.setAttribute("fvo", vo);
+		request.setAttribute("fList", fList);
+		// JSP로 값을 전송
+		// request / session
+		request.setAttribute("main_jsp", "../main/home.jsp");
+		
 		// 화면 변경
 		return "../main/main.jsp";
 	}

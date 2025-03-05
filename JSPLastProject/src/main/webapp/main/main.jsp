@@ -42,7 +42,7 @@
     
     <jsp:include page="../main/header.jsp"></jsp:include>
     
-    <jsp:include page="../main/home.jsp"></jsp:include>
+    <jsp:include page="${main_jsp }"></jsp:include>
     
     <!-- *************** Cookie *****************  -->
     <!-- ****** Instagram Area Start ****** -->

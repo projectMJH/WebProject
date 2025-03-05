@@ -36,7 +36,7 @@
                             </c:if>
                             <c:if test="${sessionScope.id!=null }">
                             <div class="login">
-                                ${sessionScope.name }(${sessionScope.admin=='y'?"관리자":"일반사용자" }) 님 로그인되었습니다.&nbsp;&nbsp;
+                                <
                                 <a href="register.html">로그아웃</a>
                             </div>
                             </c:if>
