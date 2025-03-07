@@ -18,6 +18,17 @@ import com.sist.dao.*;
 // JSP (디자인) => Model => DAO => Model => JSP
 //			  | Controller		  | Controller
 @Controller
+/*
+ * 				JSP	.do
+ * 				 |	
+ * 			DispatcherServlet (Controller) ***
+ * 				 |	
+ * 			  (Model)
+ * 				 |	request
+ * 			DispatcherServlet	***
+ * 				 |	request
+ * 			   (JSP)
+ */
 public class FoodModel {
 	@RequestMapping("food/food_list.do")
 	public String food_list(HttpServletRequest request, HttpServletResponse response)
@@ -92,7 +103,7 @@ public class FoodModel {
 		return "../main/main.jsp";
 	}
 	@RequestMapping("food/food_find_ajax.do")
-	public void recipe_find_ajax(HttpServletRequest request,HttpServletResponse response)
+	public void food_find_ajax(HttpServletRequest request,HttpServletResponse response)
 	{
 		// data:{"fd":fd,"ss":ss,"page":1},
 		String page=request.getParameter("page");
@@ -114,6 +125,7 @@ public class FoodModel {
 		
 		//JSON변경
 		JSONArray arr=new JSONArray();
+		int i=0;
 		for(FoodVO vo:list)
 		{
 			JSONObject obj=new JSONObject();
@@ -121,12 +133,21 @@ public class FoodModel {
 			obj.put("name", vo.getName());
 			obj.put("poster", vo.getPoster());
 			obj.put("score", vo.getScore());
-			obj.put("type", vo.getType());
 			obj.put("content", vo.getContent());
 			obj.put("theme", vo.getTheme());
 			obj.put("phone", vo.getPhone());
 			obj.put("address", vo.getAddress());
+			obj.put("likecount", vo.getLikecount());
+			obj.put("replycount", vo.getReplycount());
+			if(i==0)
+			{
+				obj.put("curpage", curpage);
+				obj.put("totalpage", totalpage);
+				obj.put("startPage", startPage);
+				obj.put("endPage", endPage);
+			}
 			arr.add(obj);
+			i++;
 		}
 		
 		// 전송

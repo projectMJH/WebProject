@@ -1,27 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%--
+    String
+    StringBuffer
+ --%>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+a:hover{
+    cursor: pointer;
+}
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
     $('#ss').val('마포')
-    let fd=$('#fd').val()
-    let ss=$('#ss').val()
-    alert("fd:"+fd+",ss:"+ss)
-	$.ajax({
-		type:'post',
-		url:'../food/food_find_ajax.do',
-		data:{"fd":fd,"ss":ss,"page":1},
-	    success:function(result){
-	    	$('#view').text(result)
-	    	let json=JSON.parse(result)
-	    }
+    print_page(1);
+	$('#findBtn').click(function(){
+	    print_page(1);
+	})
+	$('#ss').keydown(function(e){
+		if(e.keyCode==13)
+		{
+		    print_page(1);
+	    }	
 	})
 })
+function print_page(page)
+{
+    let fd=$('#fd').val()
+    let ss=$('#ss').val()
+    $.ajax({
+        type:'post',
+        url:'../food/food_find_ajax.do',
+        data:{"fd":fd,"ss":ss,"page":page},
+        success:function(result){
+            //$('#view').text(result)
+            let json=JSON.parse(result)
+            //console.log(json)
+            jsonView(json)
+        }
+    })
+}
+/* 
+function prev(page)
+{
+	print_page(page)
+}
+function next(page)
+{
+    print_page(page)
+}
+function pageChange(page)
+{
+    print_page(page)
+} 
+*/
 function jsonView(json)
 {
     // 이미지 
@@ -62,34 +99,42 @@ function jsonView(json)
             +'</div>'
             +'</div>'
             +'</div>'
-       html2+='<div class="col-12">'
-       +'<div class="pagination-area d-sm-flex mt-15">'
-       +'<nav aria-label="#">'
-       +'<ul class="pagination">'
-       +'<c:if test="${startPage>1 }">'
-       +'<li class="page-item">'
-       +'<a class="page-link" href="../food/food_list.do?page=${startPage-1 }"><i class="fa fa-angle-double-left" aria-hidden="true"> 이전</i></a>'
-       +'</li>'
-       +'</c:if>'
-       +'<c:forEach var="i" begin="${startPage }" end="${endPage }">'
-       +'<li class="page-item ${i==curpage?'active':'' }"><a class="page-link" href="../food/food_list.do?page=${i }">${i }</a></li>'
-       +'</c:forEach>'
-       +'<c:if test="${endPage<totalpage }">'
-       +'<li class="page-item">'
-       +'<a class="page-link" href="../food/food_list.do?page=${endPage+1 }">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>'
-       +'</li>'
-       +'</c:if>'
-       +'</ul>'
-       +'</nav>'
-       +'<div class="page-status">'
-       +'<p>Page ${curpage } of ${totalpage } results</p>'
-       +'</div>'
-       +'</div>'
-       +'</div>'
-    
     })
+    html+='<div class="col-12">'
+         +'<div class="pagination-area d-sm-flex mt-15">'
+         +'<nav aria-label="#">'
+         +'<ul class="pagination">'
+         if(json[0].startPage>1)
+         {
+        	html+='<li class="page-item">'
+            +'<a class="page-link" onclick="print_page('+(json[0].startPage-1)+')"><i class="fa fa-angle-double-left" aria-hidden="true"> 이전</i></a>'
+            +'</li>'
+         } 
+         for(let i=json[0].startPage;i<=json[0].endPage;i++)
+         {
+        	if(json[0].curpage===i)
+        	{
+                html+='<li class="page-item active"><a class="page-link" onclick="print_page('+i+')">'+i+'</a></li>' 
+        	}
+        	else
+        	{
+                html+='<li class="page-item"><a class="page-link" onclick="print_page('+i+')">'+i+'</a></li>' 
+        	}	
+         }
+         if(json[0].endPage<json[0].totalpage)
+         {
+        	html+='<li class="page-item">'
+            +'<a class="page-link" onclick="print_page('+(json[0].endPage+1)+')">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>'
+            +'</li>'
+         } 
+    html+='</ul>'
+         +'</nav>'
+         +'<div class="page-status">'
+         +'<p>Page '+json[0].curpage+' of '+json[0].totalpage+' results</p>'
+         +'</div>'
+         +'</div>'
+         +'</div>' 
     $('#view').html(html)
-    
     // 페이지
 }
 </script>
@@ -134,11 +179,10 @@ function jsonView(json)
     <!-- ****** Archive Area Start ****** -->
     <section class="archive-area section_padding_80">
         <div class="container">
-            <div class="row">
-            <div id="view">
-            </div>
+            <div class="row" id="view">
 
-<%--                 <div class="col-12">
+<%--
+                 <div class="col-12">
                     <div class="pagination-area d-sm-flex mt-15">
                         <nav aria-label="#">
                             <ul class="pagination">
