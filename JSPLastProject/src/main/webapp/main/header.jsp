@@ -36,7 +36,6 @@
                             </c:if>
                             <c:if test="${sessionScope.id!=null }">
                             <div class="login">
-                                <
                                 <a href="register.html">로그아웃</a>
                             </div>
                             </c:if>
@@ -97,19 +96,34 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">레시피</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">레시피목록</a>
-                                        <a class="dropdown-item" href="archive.html">레시피검색</a>
-                                        <a class="dropdown-item" href="archive.html">세프</a>
+                                    <%--
+                                            recipe_list.do  호출 명령
+                                                            *.do
+                                            recipe_find.do => DispatcherServlet
+                                                                      |
+                                                                  Model중에 @RequestMapping을 찾는다      
+                                                                      | 밑에 있는 메서드 호출
+                                                                        ===============
+                                                                         request.addAttribute()
+                                                                            | request를 받아서
+                                                                            | return에 있는 JSP로 넘겨준다
+                                            스프링
+                                                => @RequestMapping을 찾아주는 역할 : HandlerMapping
+                                                => JSP를 찾아서 request를 전송하는 역할 : ViewResolver                                
+                                     --%>
+                                        <a class="dropdown-item" href="../recipe/recipe_list.do">레시피목록</a>
+                                        <a class="dropdown-item" href="../recipe/recipe_find.do">레시피검색</a>
+                                        <a class="dropdown-item" href="../recipe/chef_list.do">세프</a>
                                         <a class="dropdown-item" href="archive.html">레시피등록</a><!-- sessionScope.id 체크  -->
                                     </div>
                                 </li>                                
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">서울여행</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">명소</a>
-                                        <a class="dropdown-item" href="archive.html">쇼핑</a>
-                                        <a class="dropdown-item" href="archive.html">자연 & 관광</a>
-                                        <a class="dropdown-item" href="archive.html">음식</a>
+                                        <a class="dropdown-item" href="../seoul/seoul_list.do?mode=1">명소</a>
+                                        <a class="dropdown-item" href="../seoul/seoul_list.do?mode=2">자연 & 관광</a>
+                                        <a class="dropdown-item" href="../seoul/seoul_list.do?mode=3">쇼핑</a>
+                                        <a class="dropdown-item" href="../seoul/seoul_list.do?mode=4">음식</a>
                                         <a class="dropdown-item" href="archive.html">날씨</a>
                                         <a class="dropdown-item" href="archive.html">여행코스</a><!-- sessionScope.id 체크  -->
                                     </div>

@@ -3,6 +3,7 @@ package com.sist.model;
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.*;
@@ -19,11 +20,37 @@ public class MainModel {
 		// chefList => recipeList => newsList => cookieList
 		request.setAttribute("fvo", vo);
 		request.setAttribute("fList", fList);
+		
+		ChefVO cvo=RecipeDAO.recipeTodayChef();
+		List<RecipeVO> rList=RecipeDAO.recipeData7();
+		
+		request.setAttribute("cvo", cvo);
+		request.setAttribute("rList", rList);
+		//오늘의 셰프
+		List<FoodVO> cList=new ArrayList<FoodVO>();
+		//레시피 데이터
+		Cookie[] cookies=request.getCookies();
+		if(cookies!=null) 
+		{
+			for(int i=cookies.length-1;i>=0;i--)
+			{
+				if(cookies[i].getName().startsWith("food_"))
+				{
+					String fno=cookies[i].getValue();
+					FoodVO fvo=FoodDAO.foodCookieData(Integer.parseInt(fno));
+					// where fno=1
+					cList.add(fvo);
+				}
+			}
+		}
+		// cookie 데이터
+		request.setAttribute("cList", cList);
 		// JSP로 값을 전송
 		// request / session
 		request.setAttribute("main_jsp", "../main/home.jsp");
 		
 		// 화면 변경
+		// include => 파일에서 request를 공유할 수 있다
 		return "../main/main.jsp";
 	}
 }

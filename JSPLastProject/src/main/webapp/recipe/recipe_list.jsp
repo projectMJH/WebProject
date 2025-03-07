@@ -14,7 +14,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="bradcumb-title text-center">
-                        <h2>맛집 목록</h2>
+                        <h2>레시피 목록</h2>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">food-list Page</li>
+                            <li class="breadcrumb-item active" aria-current="page">recipe-list Page</li>
                         </ol>
                     </nav>
                 </div>
@@ -47,8 +47,8 @@
                     <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
                         <!-- Post Thumb -->
                         <div class="post-thumb">
-                            <a href="../food/food_detail_before.do?fno=${vo.fno }">
-                            <img src="https://www.menupan.com${vo.poster }" style="width: 100%; height:250px">
+                            <a href="#">
+                            <img src="${vo.poster }" style="width: 100%; height:250px">
                             </a>
                         </div>
                         <!-- Post Content -->
@@ -57,11 +57,11 @@
                                 <div class="post-author-date-area d-flex">
                                     <!-- Post Author -->
                                     <div class="post-author">
-                                        <a href="#">${vo.type }</a>
+                                        <a href="#">${vo.chef }</a>
                                     </div>
                                     <!-- Post Date -->
                                     <div class="post-date">
-                                        <a href="#">${vo.score }</a>
+                                        <a href="#">${vo.hit }</a>
                                     </div>
                                 </div>
                                 <!-- Post Comment & Share Area -->
@@ -80,8 +80,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="../food/food_detail_before.do?fno=${vo.fno }">
-                                <h4 class="post-headline">${vo.name }</h4>
+                            <a href="#">
+                                <h4 class="post-headline">${vo.title }</h4>
                             </a>
                         </div>
                     </div>
@@ -95,15 +95,15 @@
                             <ul class="pagination">
                                 <c:if test="${startPage>1 }">
                                 <li class="page-item">
-                                    <a class="page-link" href="../food/food_list.do?page=${startPage-1 }"><i class="fa fa-angle-double-left" aria-hidden="true"> 이전</i></a>
+                                    <a class="page-link" href="../recipe/recipe_list.do?page=${startPage-1 }"><i class="fa fa-angle-double-left" aria-hidden="true"> 이전</i></a>
                                 </li>
                                 </c:if>
                                 <c:forEach var="i" begin="${startPage }" end="${endPage }">
-                                  <li class="page-item ${i==curpage?'active':'' }"><a class="page-link" href="../food/food_list.do?page=${i }">${i }</a></li>
+                                  <li class="page-item ${i==curpage?'active':'' }"><a class="page-link" href="../recipe/recipe_list.do?page=${i }">${i }</a></li>
                                 </c:forEach>
                                <c:if test="${endPage<totalpage }">
                                 <li class="page-item">
-                                    <a class="page-link" href="../food/food_list.do?page=${endPage+1 }">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                    <a class="page-link" href="../recipe/recipe_list.do?page=${endPage+1 }">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                                 </li>
                                 </c:if>
                             </ul>
@@ -118,6 +118,8 @@
         </div>
     </section>
     <!-- ****** Archive Area End ****** -->
+
+
 
 </body>
 </html>

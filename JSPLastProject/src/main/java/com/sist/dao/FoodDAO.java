@@ -63,4 +63,34 @@ public class FoodDAO {
 		session.close();
 		return total;
 	}
+	public static FoodVO foodDetailData(int fno)
+	{
+		SqlSession session=ssf.openSession();
+		session.update("foodHitIncrement",fno);
+		//session.commit();
+		FoodVO vo=session.selectOne("foodDetailData",fno);
+		session.close();
+		return vo;
+	}
+	public static FoodVO foodCookieData(int fno)
+	{
+		SqlSession session=ssf.openSession();
+		FoodVO vo=session.selectOne("foodDetailData",fno);
+		session.close();
+		return vo;
+	}
+	public static List<FoodVO> foodFindData(Map map)
+	{
+		SqlSession session=ssf.openSession();
+		List<FoodVO> list=session.selectList("foodFindData",map);
+		session.close();
+		return list;
+	}
+	public static int foodFindTotalPage(Map map)
+	{
+		SqlSession session=ssf.openSession();
+		int total=session.selectOne("foodFindTotalPage",map);
+		session.close();
+		return total;
+	}
 }
