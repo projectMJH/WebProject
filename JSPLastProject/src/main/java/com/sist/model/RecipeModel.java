@@ -85,4 +85,27 @@ public class RecipeModel {
 		request.setAttribute("main_jsp", "../recipe/chef_list.jsp");
 		return "../main/main.jsp";
 	}
+	@RequestMapping("recipe/recipe_find.do")
+	public String recipe_find(HttpServletRequest request,HttpServletResponse response)
+	{
+		String[] findArr=request.getParameterValues("fs");
+		if(findArr==null)
+			findArr=new String[] {"T"};
+		String ss=request.getParameter("ss");
+		if(ss==null)
+			ss="만개";
+		
+		Map map=new HashMap();
+		map.put("findArr", findArr);
+		map.put("ss", ss);
+		List<RecipeVO> list=RecipeDAO.recipeFindData(map);
+		request.setAttribute("list", list);
+		request.setAttribute("main_jsp", "../recipe/recipe_find.jsp");
+		return "../main/main.jsp";
+	}
+	/*
+	 * 	1. return "../main/main.jsp" 화면 출력(메뉴 클릭시)
+	 *  2. return "../food/food.jsp" ajax 나 viewjs 이용시
+	 *  3. return "redirect:../main/main.do" insert,update 수행 후
+	 */
 }

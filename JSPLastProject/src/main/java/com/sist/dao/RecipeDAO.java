@@ -109,4 +109,46 @@ public class RecipeDAO {
 		}
 		return total;
 	}
+	/*
+	 * 		1. MyBaits
+	 * 			DML => select , update, delete, insert, sql
+	 * 					  |
+	 * 				   resultMap : JOIN / SUBQUERY
+	 * 			동적 쿼리
+	 * 				=> <trim>	: 추가 / 제거
+	 * 				=> <bind>	: 변수형 = 문장이 긴 경우
+	 * 				   <bind name="likes" value="'%'||#{ss}||'%'">
+	 * 					#{likes}
+	 * 				=> <foreach> : in 연산자 데이터 여러개 (checkbox)
+	 * 					<foreach collection="arr" item="no">
+	 * 										==== Map key
+	 * 					for(int no:arr)
+	 * 					=> 배열 / 컬렉션
+	 * 						=> 반드시 Map에 채워서 설정	
+	 * 				=> <where>	
+	 * 					<where>
+	 * 						<if test="조건">AND id=#{id}</if>
+	 * 						<if test="조건">AND pwd=#{pwd}</if>
+	 * 					</where>
+	 * 				=> <if>	
+	 * 					=> 단일 조건문
+	 * 				=> <choose>	: 다중 조건문
+	 * 					<when test=""></when>
+	 * 					<when test=""></when>
+	 * 					<otherwise></otherwise>
+	 * 				   </choose>
+	 * 				=> 인정 : sql / css
+	 * 
+	 * 				Model / DAO / VO	=> Back
+	 * 				JSP / React / Vue / Jquery(Ajax) => Front
+	 * 				XML => DBA
+	 * 
+	 */
+	public static List<RecipeVO> recipeFindData(Map map)
+	{
+		SqlSession session=ssf.openSession();
+		List<RecipeVO> list=session.selectList("recipeFindData",map);
+		session.close();
+		return list;
+	}
 }

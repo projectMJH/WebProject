@@ -6,6 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="../shadow/css/shadowbox.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
+<script type="text/javascript">
+Shadowbox.init({
+    players:['iframe']
+})
+function login(){
+    Shadowbox.open({
+        content:'../member/login.do',
+        player:'iframe',
+        width:310,
+        height:240,
+        title:'로그인'
+    })	
+}
+</script>
 </head>
 <body>
     <!-- ****** Top Header Area Start ****** -->
@@ -28,15 +45,16 @@
                         <div class="login_register_area d-flex">
                             <c:if test="${sessionScope.id==null }">
                             <div class="login">
-                                <a href="register.html">로그인</a>
+                                <a href="javascript:login()">로그인</a>
                             </div>
                             <div class="register">
-                                <a href="register.html">회원가입</a>
+                                <a href="../member/join.do">회원가입</a>
                             </div>
                             </c:if>
                             <c:if test="${sessionScope.id!=null }">
                             <div class="login">
-                                <a href="register.html">로그아웃</a>
+                                ${sessionScope.name} ${sessionScope.admin=='y'?"(관리자)":""} 님이 로그인 하셨습니다&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="../member/logout.do">로그아웃</a>
                             </div>
                             </c:if>
                           </div>
@@ -73,7 +91,7 @@
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">회원</a>
                                     <c:if test="${sessionScope.id==null }">
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">회원가입</a>
+                                        <a class="dropdown-item" href="../member/join.do">회원가입</a>
                                         <a class="dropdown-item" href="archive.html">아이디찾기</a>
                                         <a class="dropdown-item" href="single.html">비밀번호찾기</a>
                                     </div>
@@ -134,7 +152,7 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">커뮤니티</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">자유게시판</a>
+                                        <a class="dropdown-item" href="../board/board_list.do">자유게시판</a>
                                         <a class="dropdown-item" href="archive.html">묻고답하기</a><!-- sessionScope.id 체크  -->
                                         <a class="dropdown-item" href="archive.html">공지사항</a>
                                         <a class="dropdown-item" href="archive.html">실시간채팅</a><!-- sessionScope.id 체크  -->
@@ -146,12 +164,12 @@
                                 <c:if test="${sessionScope.id!=null }">
                                   <c:if test="${sessionScope.admin=='n' }">
                                   <li class="nav-item">
-                                      <a class="nav-link" href="#">마이페이지</a>
+                                      <a class="nav-link" href="../mypage/my_main.do">마이페이지</a>
                                   </li>
                                   </c:if>
                                   <c:if test="${sessionScope.admin=='y' }">
                                   <li class="nav-item">
-                                      <a class="nav-link" href="#">관리자페이지</a>
+                                      <a class="nav-link" href="../adminpage/admin_main.do">관리자페이지</a>
                                   </li>
                                   </c:if>
                                 </c:if>
