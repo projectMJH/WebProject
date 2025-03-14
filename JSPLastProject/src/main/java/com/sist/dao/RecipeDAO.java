@@ -151,4 +151,27 @@ public class RecipeDAO {
 		session.close();
 		return list;
 	}
+	public static RecipeDetailVO recipeDetailData(int no)
+	{
+		SqlSession session=ssf.openSession();
+		session.update("recipeHitIncrement",no);
+		session.commit();
+		RecipeDetailVO vo=session.selectOne("recipeDetailData",no);
+		session.close();
+		return vo;
+	}
+	public static List<RecipeVO> recipeChefMakeData(Map map)
+	{
+		SqlSession session=ssf.openSession();
+		List<RecipeVO> list=session.selectList("recipeChefMakeData",map);
+		session.close();
+		return list;
+	}
+	public static int recipeChefMakeTotalPage(int no)
+	{
+		SqlSession session=ssf.openSession();
+		int total=session.selectOne("recipeChefMakeTotalPage",no);
+		session.close();
+		return total;
+	}
 }

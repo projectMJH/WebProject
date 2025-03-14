@@ -5,6 +5,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#updateBtn').click(function(){
+		let no=$('#no').val()
+		// 데이터 전송 (수정 요청)
+		$.ajax({
+			type:'post',
+			url:'../qna/qna_update_ok.do',
+			data:$('#frm').serialize(),
+			success:function(result)
+			{
+				// 200
+			    location.href="../qna/qna_detail.do?no="+no 
+			},
+			effor:function(err)
+			{
+				// 404, 405, 403, 500
+				alert(err)
+			}
+		})
+	})
+})
+</script>
 </head>
 <body>
     <!-- ****** Breadcumb Area Start ****** -->
@@ -26,7 +50,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">새글</li>
+                            <li class="breadcrumb-item active" aria-current="page">수정하기</li>
                         </ol>
                     </nav>
                 </div>
@@ -39,20 +63,14 @@
     <section class="archive-area section_padding_80">
         <div class="container">
             <div class="row" style="width:800px;">
-                <form method=post action="../board/board_update_ok.do">
+                <form method=post id="frm">
                 <table class="table">
-                    <tr>
-                        <th class="text-center" width=20%>이름</th>
-                        <td width=80%>
-                            <input type="text" name="name" id="name" required value="${vo.name }">
-                            <input type=hidden name="no" value="${vo.no }">
-                            <input type=hidden name="page" value="${page }">
-                        </td>
-                    </tr>
                     <tr>
                         <th class="text-center" width=20%>제목</th>
                         <td width=80%>
                             <input type="text" name="subject" id="subject" required value="${vo.subject }">
+                            <input type=hidden name=no value="${vo.no }" id="no">
+                            <%-- --%>
                         </td>
                     </tr>
                     <tr>
@@ -62,14 +80,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="text-center" width=20%>비밀번호</th>
-                        <td width=80%>
-                            <input type="password" name="pwd" id="pwd" required>
-                        </td>
-                    </tr>
-                    <tr>
                         <td colspan="2" class="text-center">
-                            <input type="submit" value="수정"class="btn-outline-primary btn-sm">
+                            <input type="button" value="수정"class="btn-outline-primary btn-sm"
+                                    id="updateBtn">
                             <input type="button" value="취소"class="btn-outline-danger btn-sm"
                              onclick="javascript:history.back()">
                         </td>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="bradcumb-title text-center">
-                        <h2>수정하기</h2>
+                        <h2>공지</h2>
                     </div>
                 </div>
             </div>
@@ -26,7 +27,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">새글</li>
+                            <li class="breadcrumb-item active" aria-current="page">내용보기</li>
                         </ol>
                     </nav>
                 </div>
@@ -39,45 +40,40 @@
     <section class="archive-area section_padding_80">
         <div class="container">
             <div class="row" style="width:800px;">
-                <form method=post action="../board/board_update_ok.do">
+
                 <table class="table">
                     <tr>
-                        <th class="text-center" width=20%>이름</th>
-                        <td width=80%>
-                            <input type="text" name="name" id="name" required value="${vo.name }">
-                            <input type=hidden name="no" value="${vo.no }">
-                            <input type=hidden name="page" value="${page }">
+                        <th width=20% class="text-center">공지</th>
+                        <td width=30% class="text-center">${vo.types }</td>
+                        <th width=20% class="text-center">작성일</th>
+                        <td width=30% class="text-center">${vo.dbday }</td>
+                    </tr>
+                    <tr>
+                        <th width=20% class="text-center">이름</th>
+                        <td width=30% class="text-center">${vo.name }</td>
+                        <th width=20% class="text-center">조회수</th>
+                        <td width=30% class="text-center">${vo.hit }</td>
+                    </tr>
+                    <tr>
+                        <th width=20% class="text-center">제목</th>
+                        <td colspan="3">${vo.subject }</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-left" valign="top" height="200">
+                            <pre style="white-space: pre-wrap; border: none; background-color: white;">
+                                ${vo.content }
+                            </pre>
                         </td>
                     </tr>
                     <tr>
-                        <th class="text-center" width=20%>제목</th>
-                        <td width=80%>
-                            <input type="text" name="subject" id="subject" required value="${vo.subject }">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-center" width=20%>내용</th>
-                        <td width=80%>
-                            <textarea cols="52" rows="10" name="content" id="content" required>${vo.content }</textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-center" width=20%>비밀번호</th>
-                        <td width=80%>
-                            <input type="password" name="pwd" id="pwd" required>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="text-center">
-                            <input type="submit" value="수정"class="btn-outline-primary btn-sm">
-                            <input type="button" value="취소"class="btn-outline-danger btn-sm"
-                             onclick="javascript:history.back()">
+                        <td colspan="4" class="text-right">
+                            <a href="../notice/notice_user_list.do" class="btn btn-warning btn-xs">목록</a>
                         </td>
                     </tr>
                 </table>
-                </form>
             </div>
         </div>
     </section>        
+
 </body>
 </html>

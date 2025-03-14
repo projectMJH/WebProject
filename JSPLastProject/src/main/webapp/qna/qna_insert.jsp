@@ -13,7 +13,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="bradcumb-title text-center">
-                        <h2>수정하기</h2>
+                        <h2>질의하기</h2>
                     </div>
                 </div>
             </div>
@@ -39,26 +39,18 @@
     <section class="archive-area section_padding_80">
         <div class="container">
             <div class="row" style="width:800px;">
-                <form method=post action="../board/board_update_ok.do">
+                <form method=post action="../qna/qna_insert_ok.do">
                 <table class="table">
-                    <tr>
-                        <th class="text-center" width=20%>이름</th>
-                        <td width=80%>
-                            <input type="text" name="name" id="name" required value="${vo.name }">
-                            <input type=hidden name="no" value="${vo.no }">
-                            <input type=hidden name="page" value="${page }">
-                        </td>
-                    </tr>
                     <tr>
                         <th class="text-center" width=20%>제목</th>
                         <td width=80%>
-                            <input type="text" name="subject" id="subject" required value="${vo.subject }">
+                            <input type="text" name="subject" id="subject" required>
                         </td>
                     </tr>
                     <tr>
                         <th class="text-center" width=20%>내용</th>
                         <td width=80%>
-                            <textarea cols="52" rows="10" name="content" id="content" required>${vo.content }</textarea>
+                            <textarea cols="52" rows="10" name="content" id="content" required></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -69,7 +61,7 @@
                     </tr>
                     <tr>
                         <td colspan="2" class="text-center">
-                            <input type="submit" value="수정"class="btn-outline-primary btn-sm">
+                            <input type="submit" value="질의"class="btn-outline-primary btn-sm">
                             <input type="button" value="취소"class="btn-outline-danger btn-sm"
                              onclick="javascript:history.back()">
                         </td>

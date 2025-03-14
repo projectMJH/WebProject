@@ -13,7 +13,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="bradcumb-title text-center">
-                        <h2>자유 게시판</h2>
+                        <h2>글쓰기</h2>
                     </div>
                 </div>
             </div>
@@ -42,33 +42,33 @@
                 <form method=post action="../board/board_insert_ok.do">
                 <table class="table">
                     <tr>
-                        <th class="text-center" width=15%>이름</th>
-                        <td width=85%>
+                        <th class="text-center" width=20%>이름</th>
+                        <td width=80%>
                             <input type="text" name="name" id="name" required>
                         </td>
                     </tr>
                     <tr>
-                        <th class="text-center" width=15%>제목</th>
-                        <td width=85%>
+                        <th class="text-center" width=20%>제목</th>
+                        <td width=80%>
                             <input type="text" name="subject" id="subject" required>
                         </td>
                     </tr>
                     <tr>
-                        <th class="text-center" width=15%>내용</th>
-                        <td width=85%>
+                        <th class="text-center" width=20%>내용</th>
+                        <td width=80%>
                             <textarea cols="52" rows="10" name="content" id="content" required></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <th class="text-center" width=15%>비밀번호</th>
-                        <td width=85%>
+                        <th class="text-center" width=20%>비밀번호</th>
+                        <td width=80%>
                             <input type="password" name="pwd" id="pwd" required>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2" class="text-center">
                             <input type="submit" value="글쓰기"class="btn-outline-primary btn-sm">
-                            <input type="button" value="취소"class="btn-outline-primary btn-sm"
+                            <input type="button" value="취소"class="btn-outline-danger btn-sm"
                              onclick="javascript:history.back()">
                         </td>
                     </tr>

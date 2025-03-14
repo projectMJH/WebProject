@@ -31,7 +31,7 @@
         WHERE no=#{no}
     </select>
     <!-- 수정 -->
-    <update id="boardUpdateData" parameterType="BoardVO">
+    <update id="boardUpdate" parameterType="BoardVO">
         UPDATE project_board SET
         name=#{name},subject=#{subject},content=#{content}
         WHERE no=#{no}

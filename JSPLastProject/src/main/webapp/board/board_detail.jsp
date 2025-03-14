@@ -129,8 +129,42 @@ $(function(){
                         </td>
                     </tr>
                     <tr>
+                    <%--
+                           board_update.do=DispatcherServelet
+                                           Controller
+                                                |
+                                               ~Model => @RequestMapping
+                                                          ==============
+                                                          제어하는 위치
+                                                          아래 / 옆 
+                                                | 결과값 => request에 담아서 전송
+                                               JSP            |
+                                                            session(유지) / request(화면)
+                                                            -------        --------             
+                                                            사용자 정보,      출력 후 초기화
+                                                            장바구니  
+                                               JSP는 메서드 제작을 할 수 없다
+                                               --- 메서드 영역
+                                                   --------
+                                                   public void _jspService(HttpServletRequest request,
+                                                                           HttpServletResponse response)   
+                                                   {
+                                                        JSP => 코딩
+                                                   }                                  
+                                    @ => 클래스 A를 구분                      
+                                    class A
+                                    {
+                                        @Autowired
+                                        B b;
+                                        
+                                        public A(@Component B b) {}
+                                        
+                                        @RequestMapping
+                                        public void display() {} => 구현
+                                    }                          
+                     --%>
                         <td colspan="4" class="text-right">
-                            <a href="#" class="btn btn-outline-info btn-xs">수정</a>
+                            <a href="../board/board_update.do?no=${vo.no }&page=${page }" class="btn btn-outline-info btn-xs">수정</a>
                             <span class="btn btn-outline-success btn-xs" id="del">삭제</span>
                             <a href="../board/board_list.do?page=${page }" class="btn btn-outline-warning btn-xs">목록</a>
                         </td>
